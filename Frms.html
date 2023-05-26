@@ -1,47 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="CSS/styleforms.css" rel="stylesheet" type="text/css">
+
     <title>Formulario</title>
 </head>
-
 <body>
-    <div class="overlay">
-        <form action="muestraInf.html" method="get" onsubmit="return validar()">
-            <div class="con">
-                <header class="head-form">
-                    <h2>Log In</h2>
-                    <p>Coloca en los siguientes campos tus datos personales</p>
-                </header>
-                <input placeholder="Nombre(s)" class="input1" name="name" type="text">
+ 
+    <center>
+    <h1>Formulario</h1>
+    <form action="muestraInf.html" method="get" onsubmit="return validar()">
 
-                <input placeholder="Apellido Paterno" class="input2" name="apellido1" type="text">
+        <input placeholder="Nombre" type="text" name="nombre" class="input1"><br>
 
-                <input placeholder="Apellido Materno" class="input3" name="apellido2" type="text">
+        <input placeholder="Apellido Paterno" type="text" name="apellido1" class="input2"><br>
+        
+        <input placeholder="Apellido Materno" type="text" name="apellido2" class="input3"><br>
+        
+        <input placeholder="Correo" type="email" name="correo" class="input4"><br>
+        
+        <input placeholder="Fecha de nacimiento" type="text" onfocus="(this.type='date')" name="fnac" class="input5"><br>
+        
+        <input placeholder="Telefono" type="number" name="telefono" class="input6"><br>
+        
+        <input placeholder="Usuario" type="text" name="usuario" class="input7"><br>
+        
+        <input placeholder="Contraseña" type="password" name="password" class="input8"><br>
+        
+        <input placeholder="Repetir Contraseña" type="password" name="repassword" class="input9"><br>
+        
+        <button type="submit" value="Registrar"> SUBIR </button><br>
+    
+    </form>
+    </center>
+</body>
+</html>
+<script>
+    getParameter=(key)=>{
+        address=window.location.search;
+        parameterList = new URLSearchParams(address);
+        return parameterList.get(key);
+    }
+    var nombre=getParameter("nombre");
+    var apellido1=getParameter("apellido1");
+    var apellido2=getParameter("apellido2");
+    var correo=getParameter("correo");
+    var fnac=getParameter("fnac");
+    var telefono=getParameter("telefono");
+    var usuario=getParameter("usuario");
 
-                <input placeholder="Correo" class="input4" name="email" type="text">
+    if (usuario!=null) {
+        document.getElementById("usuario").innerHTML = "User: " + usuario;
+    }
+    if (nombre!=null) {
+        document.getElementById("nombre").innerHTML = "Nombre: " + nombre;
+    }
+    if (apellido1!=null) {
+        document.getElementById("apellido1").innerHTML = "Apellidos: " + apellido1;
+    }
+    if (apellido2!=null) {
+        document.getElementById("apellido2").innerHTML = "Apellidos: " + apellido2;
+    }
+    if (correo!=null) {
+        document.getElementById("correo").innerHTML = "Enviar correo a: " + correo;
+        document.getElementById("correo").href = "mailto:" + correo;
+    }
+    if (telefono!=null) {
+        document.getElementById("telefono").innerHTML = "Llamar a: " + telefono;
+        document.getElementById("telefono").href = "tel:" + telefono;
+    }
+    if (fnac!=null) {
+        let fyear=fnac.split('-');
+        let edad=(2023-fyear[0]);
+        document.getElementById("edad").innerHTML = edad + " años";
+    }
 
-                <input placeholder="Fecha de nacimiento" class="input5" type="text" onfocus="(this.type = 'date')"
-                    id="date" name="fnac">
-
-                <input placeholder="Telefono" class="input6" name="phone" type="text">
-
-                <input placeholder="Usuario" class="input7" name="user" type="text">
-
-                <input placeholder="Contraseña" class="input8" name="password" type="password">
-
-                <input placeholder=" Repetir contraseña" class="input9" name="repassword" type="password">
-
-                <button type="submit" value="Registrarse">Subir</button>
-            </div>
-        </form>
-        <script>
-
-            function validar() {
+    function validar() {
                 var password = document.getElementsByName("password")[0].value;
                 var repassword = document.getElementsByName("repassword")[0].value;
 
@@ -57,51 +94,4 @@
 
                 return true;
             }
-
-            getParameter = (key) => {
-                address = window.location.search;
-                parameterList = new URLSearchParams(address);
-                return parameterList.get(key);
-            }
-            var nombre = getParameter("name");
-            var apellido1 = getParameter("apellido1");
-            var apellido2 = getParameter("apellido2");
-            var correo = getParameter("email");
-            var fnac = getParameter("fnac");
-            var telefono = getParameter("phone");
-            var usuario = getParameter("user");
-            var contraseña = getParameter("password");
-            var confcontraseña = getParameter("repassword");
-            if (usuario != null) {
-                document.getElementsByName("user").innerHTML = "User: " + usuario;
-            }
-            if (nombre != null) {
-                document.getElementsByName("nombre").innerHTML = "Nombre: " + nombre;
-            }
-            if (apellido1 != null) {
-                document.getElementsByName("apellido1").innerHTML = "Apellido Paterno: " + apellido1;
-            }
-            if (apellido2 != null) {
-                document.getElementsByName("apellido2").innerHTML = "Apellido Materno: " + apellido2;
-            }
-            if (correo != null) {
-                document.getElementsByName("email").innerHTML = "Enviar correo a: " + correo;
-                document.getElementsByName("email").href = "mailto:" + correo;
-            }
-            if (telefono != null) {
-                document.getElementByName("phone").innerHTML = "Llamar a: " + telefono;
-                document.getElementByName("phone").href = "tel:" + telefono;
-            }
-            if (fnac != null) {
-                let fyear = fnac.split('-');
-                let edad = (2023 - fyear[0]);
-                document.getElementsByName("edad").innerHTML = edad + " años";
-            }
-
-        </script>
-
-
-
-</body>
-
-</html>
+</script>
