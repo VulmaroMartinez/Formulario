@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="CSS/styleforms.css" rel="stylesheet" type="text/css">
+    <title>Formulario</title>
+</head>
+
+<body>
+    <div class="overlay">
+        <form action="muestraInf.html" method="get" onsubmit="return validar()">
+            <div class="con">
+                <header class="head-form">
+                    <h2>Log In</h2>
+                    <p>Coloca en los siguientes campos tus datos personales</p>
+                </header>
+                <input placeholder="Nombre(s)" class="input1" name="name" type="text">
+
+                <input placeholder="Apellido Paterno" class="input2" name="apellido1" type="text">
+
+                <input placeholder="Apellido Materno" class="input3" name="apellido2" type="text">
+
+                <input placeholder="Correo" class="input4" name="email" type="text">
+
+                <input placeholder="Fecha de nacimiento" class="input5" type="text" onfocus="(this.type = 'date')"
+                    id="date" name="fnac">
+
+                <input placeholder="Telefono" class="input6" name="phone" type="text">
+
+                <input placeholder="Usuario" class="input7" name="user" type="text">
+
+                <input placeholder="Contraseña" class="input8" name="password" type="password">
+
+                <input placeholder=" Repetir contraseña" class="input9" name="repassword" type="password">
+
+                <button type="submit" value="Registrarse">Subir</button>
+            </div>
+        </form>
+        <script>
+
+            function validar() {
+                var password = document.getElementsByName("password")[0].value;
+                var repassword = document.getElementsByName("repassword")[0].value;
+
+                if (password.length < 5) {
+                    alert("La contraseña es muy corta, debe contener más de 5 caracteres");
+                    return false;
+                }
+
+                if (password !== repassword) {
+                    alert("las contraseñas no coinciden");
+                    return false;
+                }
+
+                return true;
+            }
+
+            getParameter = (key) => {
+                address = window.location.search;
+                parameterList = new URLSearchParams(address);
+                return parameterList.get(key);
+            }
+            var nombre = getParameter("name");
+            var apellido1 = getParameter("apellido1");
+            var apellido2 = getParameter("apellido2");
+            var correo = getParameter("email");
+            var fnac = getParameter("fnac");
+            var telefono = getParameter("phone");
+            var usuario = getParameter("user");
+            var contraseña = getParameter("password");
+            var confcontraseña = getParameter("repassword");
+            if (usuario != null) {
+                document.getElementsByName("user").innerHTML = "User: " + usuario;
+            }
+            if (nombre != null) {
+                document.getElementsByName("nombre").innerHTML = "Nombre: " + nombre;
+            }
+            if (apellido1 != null) {
+                document.getElementsByName("apellido1").innerHTML = "Apellido Paterno: " + apellido1;
+            }
+            if (apellido2 != null) {
+                document.getElementsByName("apellido2").innerHTML = "Apellido Materno: " + apellido2;
+            }
+            if (correo != null) {
+                document.getElementsByName("email").innerHTML = "Enviar correo a: " + correo;
+                document.getElementsByName("email").href = "mailto:" + correo;
+            }
+            if (telefono != null) {
+                document.getElementByName("phone").innerHTML = "Llamar a: " + telefono;
+                document.getElementByName("phone").href = "tel:" + telefono;
+            }
+            if (fnac != null) {
+                let fyear = fnac.split('-');
+                let edad = (2023 - fyear[0]);
+                document.getElementsByName("edad").innerHTML = edad + " años";
+            }
+
+        </script>
+
+
+
+</body>
+
+</html>

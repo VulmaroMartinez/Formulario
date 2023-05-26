@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Registro</title>
+</head>
+<body>
+    <center>
+        <h1 name="user"></h1><br>
+        <h1 name="name"></h1><br>
+        <h2 name="apellido1"></h2><br>
+        <h2 name="apellido2"></h2><br>
+        <a  name= "email" href="">Enviar Correo</a><br>
+        <a  name= "phone" href="tel:">Telefono</a><br>
+        <h3 name="edad"></h3><br>
+    </center>
+    
+    <script>
+
+
+getParameter = (key) => {
+                address = window.location.search;
+                parameterList = new URLSearchParams(address);
+                return parameterList.get(key);
+            }
+            var nombre = getParameter("name");
+            var apellido1 = getParameter("apellido1");
+            var apellido2 = getParameter("apellido2");
+            var correo = getParameter("email");
+            var fnac = getParameter("fnac");
+            var telefono = getParameter("phone");
+            var usuario = getParameter("user");
+            var contraseña = getParameter("password");
+            var confcontraseña = getParameter("repassword");
+            if (usuario != null) {
+                document.getElementsByName("user").innerHTML = "User: " + usuario;
+            }
+            if (nombre != null) {
+                document.getElementsByName("nombre").innerHTML = "Nombre: " + nombre;
+            }
+            if (apellido1 != null) {
+                document.getElementsByName("apellido1").innerHTML = "Apellido Paterno: " + apellido1;
+            }
+            if (apellido2 != null) {
+                document.getElementsByName("apellido2").innerHTML = "Apellido Materno: " + apellido2;
+            }
+            if (correo != null) {
+                document.getElementsByName("email").innerHTML = "Enviar correo a: " + correo;
+                document.getElementsByName("email").href = "mailto:" + correo;
+            }
+            if (telefono != null) {
+                document.getElementsByName("phone").innerHTML = "Llamar a: " + telefono;
+                document.getElementsByName("phone").href = "tel:" + telefono;
+            }
+            if (fnac != null) {
+                let fyear = fnac.split('-');
+                let edad = (2023 - fyear[0]);
+                document.getElementsByName("edad").innerHTML = edad + " años";
+            }
+
+        </script>
+
+</body>
+</html>
